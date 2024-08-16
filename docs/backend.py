@@ -23,6 +23,29 @@ def output():
     query_results = "Sample SQL Query Result Data"
     return render_template('output.html', results=query_results)
 
+def get_db_connection():
+    connection = mysql.connector.connect(
+        host='your_tidb_host',
+        port=4000,
+        user='your_username',
+        password='your_password',
+        database='your_database_name'
+    )
+    return connection
+
+@app.route('/submit_query', methods=['POST'])
+def submit_query():
+    query = request.form['query']
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    cursor.execute(query)
+    results = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+
+    return render_template('output.html', results=results)
 @app.route('/update-settings', methods=['POST'])
 def update_settings():
     theme = request.form.get('theme')
