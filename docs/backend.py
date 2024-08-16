@@ -14,6 +14,26 @@ def register():
         return redirect(url_for('login'))  # Redirect to login after successful registration
     
     return render_template('register.html')
+@app.route('/settings', methods=['GET'])
+def settings():
+    return render_template('settings.html')
+
+@app.route('/update-settings', methods=['POST'])
+def update_settings():
+    theme = request.form.get('theme')
+    language = request.form.get('language')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    confirm_password = request.form.get('confirm_password')
+    
+    # Handle settings update logic here
+    if password != confirm_password:
+        return 'Passwords do not match!', 400
+    
+    # Save the updated settings (e.g., to a database)
+    # ...
+
+    return redirect(url_for('settings'))
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
