@@ -38,5 +38,14 @@ def update_profile():
     # Save the profile picture if provided
 
     return redirect(url_for('profile'))
+def chat():
+    message = request.form['message']
+    # Process the message and generate a response
+    response_message = process_message(message)
+    return jsonify({'response': response_message})
+
+def process_message(message):
+    # This is where you'd handle the message, e.g., send it to an AI model
+    return f"Echo: {message}"
 if __name__ == '__main__':
     app.run(debug=True)
