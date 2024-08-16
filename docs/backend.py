@@ -17,6 +17,11 @@ def register():
 @app.route('/settings', methods=['GET'])
 def settings():
     return render_template('settings.html')
+@app.route('/output')
+def output():
+    # Simulate fetching query results
+    query_results = "Sample SQL Query Result Data"
+    return render_template('output.html', results=query_results)
 
 @app.route('/update-settings', methods=['POST'])
 def update_settings():
