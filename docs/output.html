@@ -26,6 +26,30 @@
             <button id="copy-results" class="bg-green-500 text-white px-4 py-2 rounded">Copy Results</button>
             <button id="download-results" class="bg-orange-500 text-white px-4 py-2 rounded">Download Results</button>
         </div>
+               <div id="results">
+            {% if results %}
+                <table>
+                    <thead>
+                        <tr>
+                            {% for col in results[0].keys() %}
+                                <th>{{ col }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in results %}
+                            <tr>
+                                {% for col in row %}
+                                    <td>{{ col }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+        </div>
         
         <a href="chatbox.html" class="bg-blue-500 text-white px-4 py-2 rounded">Back to Chatbox</a>
     </div>
