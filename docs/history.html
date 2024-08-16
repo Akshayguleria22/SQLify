@@ -35,13 +35,18 @@
 
         // Function to load history data
         function loadHistory() {
+    fetch('/history')
+        .then(response => response.json())
+        .then(data => {
             const historyList = document.getElementById('history-items');
-            historyData.forEach((item) => {
+            data.forEach((item) => {
                 const li = document.createElement('li');
                 li.textContent = item;
                 historyList.appendChild(li);
             });
-        }
+        });
+}
+
 
         // Load history on page load
         window.onload = loadHistory;
