@@ -4,13 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History Screen</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="history.css">
 </head>
 <body>
     <div class="container">
         <h1>History Screen</h1>
+
+        <!-- History List -->
+        <div class="history-list">
+            <h2>Your History</h2>
+            <ul id="history-items">
+                <!-- History items will be dynamically added here -->
+            </ul>
+        </div>
+
+        <!-- Navigation Links -->
         <a href="profile.html" class="bg-orange-500 text-white px-4 py-2 rounded">Go to Profile</a><br>
         <a href="chatbox.html" class="bg-blue-500 text-white px-4 py-2 rounded">Back to Chatbox</a>
     </div>
+
+    <!-- JavaScript to handle history display -->
+    <script>
+        // Example data - in practice, this would come from your backend
+        const historyData = [
+            "Query 1: SELECT * FROM users;",
+            "Query 2: INSERT INTO orders (product, quantity) VALUES ('Apples', 10);",
+            "Query 3: DELETE FROM users WHERE id = 5;",
+            "Query 4: UPDATE products SET price = 19.99 WHERE id = 3;"
+        ];
+
+        // Function to load history data
+        function loadHistory() {
+            const historyList = document.getElementById('history-items');
+            historyData.forEach((item) => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                historyList.appendChild(li);
+            });
+        }
+
+        // Load history on page load
+        window.onload = loadHistory;
+    </script>
 </body>
 </html>
