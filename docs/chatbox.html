@@ -4,14 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbox</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chatbox.css" type="type/css" />
 </head>
 <body>
+    
     <div class="container">
         <h1>Chatbox</h1>
+        
+        <!-- Chat Messages Container -->
+        <div class="chatbox">
+            <div id="messages">
+                <!-- Messages will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Chat Input Form -->
+        <form id="chat-form">
+            <input type="text" id="chat-input" placeholder="Type your message here..." required>
+            <button type="submit" class="bg-purple-500 text-white px-4 py-2 rounded">Send</button>
+        </form>
+
+        <!-- Navigation Links -->
         <a href="output.html" class="bg-purple-500 text-white px-4 py-2 rounded">Go to Output</a><br>
         <a href="history.html" class="bg-red-500 text-white px-4 py-2 rounded">Go to History</a><br>
         <a href="settings.html" class="bg-teal-500 text-white px-4 py-2 rounded">Go to Settings</a>
     </div>
+
+    <!-- JavaScript for chat functionality -->
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const chatInput = document.getElementById('chat-input');
+            const message = chatInput.value;
+            
+            if (message.trim()) {
+                // Add the message to the chatbox
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('message');
+                messageContainer.textContent = message;
+                document.getElementById('messages').appendChild(messageContainer);
+
+                // Clear the input field
+                chatInput.value = '';
+
+                // (Optional) Send the message to the server here using fetch or WebSocket
+            }
+        });
+    </script>
 </body>
 </html>
