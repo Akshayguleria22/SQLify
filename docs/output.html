@@ -3,13 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Output Screen</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Output Screen - SQLify</title>
+    <link rel="stylesheet" href="output.css">
 </head>
 <body>
     <div class="container">
         <h1>Output Screen</h1>
+        
+        <!-- Section for displaying query results -->
+        <div id="results-container">
+            <h2>Query Results</h2>
+            <div id="results">
+                <!-- Placeholder for results. This will be populated dynamically -->
+                <p>No results to display.</p>
+            </div>
+        </div>
+        
+        <!-- Controls for interacting with the results -->
+        <div id="controls">
+            <button id="copy-results" class="bg-green-500 text-white px-4 py-2 rounded">Copy Results</button>
+            <button id="download-results" class="bg-orange-500 text-white px-4 py-2 rounded">Download Results</button>
+        </div>
+        
         <a href="chatbox.html" class="bg-blue-500 text-white px-4 py-2 rounded">Back to Chatbox</a>
     </div>
+
+    <!-- JavaScript for handling result interactions -->
+    <script>
+        // Example JavaScript for result controls
+        document.getElementById('copy-results').addEventListener('click', function() {
+            const results = document.getElementById('results').innerText;
+            navigator.clipboard.writeText(results)
+                .then(() => alert('Results copied to clipboard!'))
+                .catch(err => console.error('Failed to copy: ', err));
+        });
+
+        document.getElementById('download-results').addEventListener('click', function() {
+            const results = document.getElementById('results').innerText;
+            const blob = new Blob([results], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'results.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    </script>
 </body>
 </html>
