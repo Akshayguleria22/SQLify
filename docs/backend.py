@@ -14,7 +14,23 @@ def register():
         return redirect(url_for('login'))  # Redirect to login after successful registration
     
     return render_template('register.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        # Implement authentication logic here
+        if username == 'admin' and password == 'password':  # Example logic
+            return redirect(url_for('chatbox'))
+        else:
+            return 'Invalid credentials', 401
 
+    return render_template('login.html')
+
+@app.route('/chatbox')
+def chatbox():
+    return 'Chatbox Page'
 @app.route('/login')
 def login():
     return render_template('login.html')
