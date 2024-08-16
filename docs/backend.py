@@ -27,8 +27,17 @@ def profile():
         'profile_pic': 'profile-pic.jpg'
     }
     return render_template('profile.html', user=user)
-
+@app.route('/history')
+def get_history():
+    history_data = [
+        "Query 1: SELECT * FROM users;",
+        "Query 2: INSERT INTO orders (product, quantity) VALUES ('Apples', 10);",
+        "Query 3: DELETE FROM users WHERE id = 5;",
+        "Query 4: UPDATE products SET price = 19.99 WHERE id = 3;"
+    ]
+    return jsonify(history_data)
 @app.route('/update-profile', methods=['POST'])
+
 def update_profile():
     username = request.form['username']
     email = request.form['email']
